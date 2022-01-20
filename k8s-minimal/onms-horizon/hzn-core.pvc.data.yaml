@@ -1,0 +1,16 @@
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: hzn-data-pvc
+  namespace: chaos-engine
+  labels:
+    app: hzn-core
+    tier: storage
+spec:
+  storageClassName: nfs-client
+  accessModes:
+  - ReadWriteMany
+  resources:
+    requests:
+      storage: 5Gi

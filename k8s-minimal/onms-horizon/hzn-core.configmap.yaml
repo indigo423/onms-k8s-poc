@@ -1,0 +1,17 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: hzn-core-config
+  namespace: chaos-engine
+data:
+  TZ: "Europe/Berlin"
+  POSTGRES_HOST: "192.168.178.22"
+  POSTGRES_PORT: "5432"
+  POSTGRES_USER: "postgres"
+  OPENNMS_DBNAME: "cehzndb"
+  OPENNMS_DBUSER: "cehznuser"
+  TIMESERIES_STRATEGY: "rrd"
+  RRD_STOREBYFOREIGNSOURCE: "true"
+  RRD_STRATEGYCLASS: "org.opennms.netmgt.rrd.rrdtool.MultithreadedJniRrdStrategy"
+  LIBRARY_JRRD2: "/usr/lib64/libjrrd2.so"

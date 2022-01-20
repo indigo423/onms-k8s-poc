@@ -1,0 +1,74 @@
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: hzn-core
+  namespace: chaos-engine
+  labels:
+    app: hzn-core
+spec:
+  serviceName: hzn-core
+  replicas: 1 # DO NOT CHANGE. The solution only allows 1 instance
+  selector:
+    matchLabels:
+      app: hzn-core
+  template:
+    metadata:
+      labels:
+        app: hzn-core
+    spec:
+      securityContext:
+        fsGroup: 10001
+      terminationGracePeriodSeconds: 120
+      containers:
+        - name: hzn-core
+          image: opennms/horizon:29.0.5
+          imagePullPolicy: IfNotPresent
+          args:
+            - -s
+          ports:
+            - containerPort: 8101
+              name: karaf
+            - containerPort: 8980
+              name: http
+            - containerPort: 1162
+              name: snmptraps
+            - containerPort: 1514
+              name: syslog
+            - containerPort: 4729
+              name: flows
+          envFrom:
+            - configMapRef:
+                name: hzn-core-config
+            - secretRef:
+                name: hzn-core-secrets
+          env:
+            - name: JAVA_OPTS # Alternative to opennms.conf
+              value: -Xms3072m -Xmx3072m -XX:+AlwaysPreTouch -XX:+UseG1GC -XX:+UseStringDeduplication
+          volumeMounts:
+            - name: logs
+              mountPath: /opt/opennms/logs
+            - name: etc
+              mountPath: /opt/opennms/etc
+            - name: rrd
+              mountPath: /opennms-data/rrd
+          resources:
+            limits:
+              cpu: '2'
+              memory: 8Gi
+            requests:
+              cpu: '2'
+              memory: 4Gi
+      volumes:
+        - name: logs
+          persistentVolumeClaim:
+            claimName: hzn-logs-pvc
+            readOnly: false
+        - name: etc
+          persistentVolumeClaim:
+            claimName: hzn-config-pvc
+            readOnly: false
+        - name: rrd
+          persistentVolumeClaim:
+            claimName: hzn-data-pvc
+            readOnly: false

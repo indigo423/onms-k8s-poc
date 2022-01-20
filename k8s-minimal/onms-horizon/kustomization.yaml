@@ -1,0 +1,12 @@
+---
+namespace: chaos-engine
+
+resources:
+- namespace.yaml
+- hzn-core.pvc.config.yaml
+- hzn-core.pvc.data.yaml
+- hzn-core.pvc.logs.yaml
+- hzn-core.configmap.yaml
+- hzn-core.statefulset.yaml
+- hzn-core.service-tcp.yaml
+- hzn-core.service-udp.yaml

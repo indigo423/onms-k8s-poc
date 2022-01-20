@@ -1,0 +1,23 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: hzn-core-udp
+  namespace: chaos-engine
+  labels:
+    app: hzn-core
+spec:
+  ports:
+    - port: 1514
+      name: syslog
+      protocol: UDP
+    - port: 1162
+      name: snmptraps
+      protocol: UDP
+    - port: 4729
+      name: flows
+      protocol: UDP
+  selector:
+    app: hzn-core
+  type: LoadBalancer
+

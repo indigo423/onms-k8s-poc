@@ -1,0 +1,9 @@
+---
+namespace: chaos-engine
+
+resources:
+- namespace.yaml
+- grafana.pvc.data.yaml
+- grafana.configmap.yaml
+- grafana.deployment.yaml
+- grafana.service.yaml
