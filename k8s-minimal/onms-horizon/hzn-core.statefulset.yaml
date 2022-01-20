@@ -20,6 +20,19 @@ spec:
       securityContext:
         fsGroup: 10001
       terminationGracePeriodSeconds: 120
+      initContainers:
+        - name: init-overlay-config
+          image: ubuntu:impish-20220105
+          securityContext:
+            runAsUser: 10001
+            allowPrivilegeEscalation: false
+          command: [ 'bash', '/init.sh' ]
+          volumeMounts:
+            - name: etc
+              mountPath: /opt/opennms/etc
+            - name: scripts
+              mountPath: /init.sh
+              subPath: init.sh
       containers:
         - name: hzn-core
           image: opennms/horizon:29.0.5
@@ -72,3 +85,6 @@ spec:
           persistentVolumeClaim:
             claimName: hzn-data-pvc
             readOnly: false
+        - name: scripts
+          configMap:
+            name: init-scripts

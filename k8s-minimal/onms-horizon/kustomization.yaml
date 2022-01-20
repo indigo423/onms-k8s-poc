@@ -10,3 +10,8 @@ resources:
 - hzn-core.statefulset.yaml
 - hzn-core.service-tcp.yaml
 - hzn-core.service-udp.yaml
+
+configMapGenerator:
+  - name: init-scripts
+    files:
+      - scripts/init.sh
