@@ -1,8 +1,14 @@
 #!/usr/bin/env bash
 
+OPENNMS_HOME="/opt/opennms"
 CONFIG_DIR="/opt/opennms/etc"
 
 umask 002
+
+if [ ! "$(ls --ignore .git --ignore .gitignore -A ${OPENNMS_HOME}/etc)"  ]; then
+  echo "No existing configuration in ${OPENNMS_HOME}/etc found. Initialize from etc-pristine."
+  cp -r ${OPENNMS_HOME}/share/etc-pristine/* ${OPENNMS_HOME}/etc/ || exit ${E_INIT_CONFIG}
+fi
 
 cat <<EOF > "${CONFIG_DIR}/opennms.properties.d/instanceid.properties"
 org.opennms.instance.id=OpenNMS

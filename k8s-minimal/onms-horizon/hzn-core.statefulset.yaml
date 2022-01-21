@@ -22,10 +22,12 @@ spec:
       terminationGracePeriodSeconds: 120
       initContainers:
         - name: init-overlay-config
-          image: ubuntu:impish-20220105
-          securityContext:
-            runAsUser: 10001
-            allowPrivilegeEscalation: false
+### If you want to run a special purpose image, make sure it runs as user 10001
+#          image: ubuntu:impish-20220105
+#          securityContext:
+#            runAsUser: 10001
+#            allowPrivilegeEscalation: false
+          image: opennms/horizon:29.0.5
           command: [ 'bash', '/init.sh' ]
           volumeMounts:
             - name: etc
