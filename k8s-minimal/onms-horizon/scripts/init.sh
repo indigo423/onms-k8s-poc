@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 OPENNMS_HOME="/opt/opennms"
-CONFIG_DIR="/opt/opennms/etc"
+CONFIG_DIR="${OPENNMS_HOME}/etc"
 
 umask 002
 
