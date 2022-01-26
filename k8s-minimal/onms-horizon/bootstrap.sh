@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-./init-secrets.sh
 kubectl apply -f namespace.yaml
+./init-secrets.sh
 kubectl apply -f hzn-core.pvc.config.yaml
 kubectl apply -f hzn-core.pvc.data.yaml
 kubectl apply -f hzn-core.pvc.logs.yaml
