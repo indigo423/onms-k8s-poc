@@ -1,5 +1,5 @@
 ---
-namespace: chaos-engine
+namespace: opennms-poc
 
 resources:
 - namespace.yaml

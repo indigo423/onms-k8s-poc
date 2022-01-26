@@ -3,7 +3,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: hzn-core-config
-  namespace: chaos-engine
+  namespace: opennms-poc
 data:
   TZ: "Europe/Berlin"
   POSTGRES_HOST: "192.168.178.22"

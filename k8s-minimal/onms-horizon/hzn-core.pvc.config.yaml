@@ -3,7 +3,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: hzn-config-pvc
-  namespace: chaos-engine
+  namespace: opennms-poc
   labels:
     app: hzn-core
     tier: storage

@@ -3,7 +3,7 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: hzn-core
-  namespace: chaos-engine
+  namespace: opennms-poc
   labels:
     app: hzn-core
 spec:
